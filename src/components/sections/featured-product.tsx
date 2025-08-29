@@ -15,14 +15,20 @@ export default function FeaturedProduct() {
         }}
       >
         <div className="product-display__image flex-1 flex justify-center items-center p-8 lg:p-16">
-          <Image
-            src="https://monin.us/cdn/shop/files/1L-YuzuPineapple.png?v=1737561127&width=450"
-            alt="Yuzu Pineapple Syrup"
-            width={450}
-            height={450}
-            className="object-contain max-w-full h-auto drop-shadow-2xl"
-            loading="lazy"
-          />
+          <div className="relative group cursor-pointer">
+            <Image
+              src="https://monin.us/cdn/shop/files/1L-YuzuPineapple.png?v=1737561127&width=450"
+              alt="Yuzu Pineapple Syrup"
+              width={450}
+              height={450}
+              className="object-contain max-w-full h-auto drop-shadow-2xl transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-y-12 group-hover:rotate-x-6 group-hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)]"
+              loading="lazy"
+              style={{
+                transformStyle: 'preserve-3d',
+                perspective: '1000px'
+              }}
+            />
+          </div>
         </div>
         
         <div 
