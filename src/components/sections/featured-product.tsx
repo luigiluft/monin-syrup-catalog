@@ -1,86 +1,82 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const NewBadge = () => (
-  <Link href="https://monin.us/collections/new-flavors" className="bg-[#D7CCC8] text-[#3E2723] text-xs font-bold uppercase px-4 py-2 rounded-full flex items-center gap-2 hover:bg-[#C4B5B0] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#e7b100] focus:ring-[#D7CCC8] shadow-sm">
-    <Image 
-      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/new-icon-3.svg?" 
-      alt="Novo" 
-      width={12} 
-      height={12}
-      className="w-3 h-3"
-    />
-    NOVO
-  </Link>
-);
-
-const FOTYBadge = () => (
-  <Link href="https://monin.us/collections/flavor-of-the-year" className="bg-[#3E2723] text-white text-xs font-bold uppercase px-5 py-2 rounded-full hover:bg-[#2E1A17] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#e7b100] focus:ring-[#3E2723] shadow-sm">
-    SABOR 2025
-  </Link>
-);
-
 export default function FeaturedProduct() {
   return (
-    <section 
-      style={{ backgroundImage: 'linear-gradient(116.74deg, #F5D061 22.2%, #D4AF37 79.86%)' }}
-      className="py-20 lg:py-28 relative overflow-hidden"
-    >
-      {/* Padrão decorativo de fundo */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 border-2 border-[#3E2723] rounded-full"></div>
-        <div className="absolute bottom-20 right-20 w-24 h-24 border border-[#3E2723] rounded-full"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-[#3E2723] rounded-full"></div>
-      </div>
-
-      <div className="max-w-[1200px] mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
-          <div className="flex justify-center lg:justify-end order-2 lg:order-1">
-            <div className="relative">
-              <Image
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/images/1L-YuzuPineapple-11.png?"
-                alt="Xarope de Yuzu com Abacaxi"
-                width={450}
-                height={700}
-                className="object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.2)] max-w-full h-auto max-h-[600px] transform hover:scale-105 transition-transform duration-500"
-              />
-              
-              {/* Círculo decorativo atrás do produto */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-white/20 rounded-full -z-10"></div>
-            </div>
-          </div>
-          
-          <div className="bg-[#e7b100] p-8 md:p-12 lg:p-16 rounded-3xl relative order-1 lg:order-2 shadow-xl">
-              {/* Sombra interna para profundidade */}
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/5 rounded-3xl"></div>
-              
-              <div className="relative z-10">
-                <div className="flex flex-wrap items-center gap-3 mb-6">
-                  <NewBadge />
-                  <FOTYBadge />
-                </div>
-                
-                <h2 className="font-kanit font-bold text-3xl md:text-4xl lg:text-5xl text-[#3E2723] leading-tight">
-                  Xarope de Yuzu com Abacaxi
-                </h2>
-                
-                <p className="font-poppins text-xl md:text-2xl text-[#3E2723] font-semibold mt-4 mb-6">
-                  R$ 56,20
-                </p>
-                
-                <p className="font-kanit text-base md:text-lg text-[#5D4037] leading-relaxed mb-8">
-                  Diga "sim" ao nosso Sabor do Ano de 2025 — Yuzu! Esta mistura vibrante de yuzu e abacaxi oferece uma explosão intensa de sabor, perfeita para criar coquetéis tropicais refrescantes, mocktails, chás gelados, bebidas energéticas e muito mais.
-                </p>
-                
-                <Link href="https://monin.us/products/yuzu-pineapple-syrup" className="inline-block bg-[#3E2723] text-white font-poppins font-bold text-base lg:text-lg uppercase tracking-widest px-12 py-4 rounded-full hover:bg-[#5D4037] hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#e7b100] focus:ring-[#3E2723]">
-                  Descobrir
-                </Link>
+    <div className="product-display__inner">
+      <div 
+        className="product-display__main flex flex-col lg:flex-row items-center min-h-[500px] lg:min-h-[600px]"
+        style={{
+          backgroundImage: "url('https://monin.us/cdn/shop/files/yuzu-background.png?v=1734726026')",
+          backgroundColor: "#efc200",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        <div className="product-display__image flex-1 flex justify-center items-center p-8 lg:p-16">
+          <Image
+            src="https://monin.us/cdn/shop/files/1L-YuzuPineapple.png?v=1737561127&width=450"
+            alt="Yuzu Pineapple Syrup"
+            width={450}
+            height={450}
+            className="object-contain max-w-full h-auto drop-shadow-2xl"
+            loading="lazy"
+          />
+        </div>
+        
+        <div 
+          className="product-display__info flex-1 p-8 lg:p-16"
+          style={{ backgroundColor: "#efc200" }}
+        >
+          <div className="product-label__container flex flex-wrap gap-3 mb-6">
+            <Link href="https://monin.us/collections/new-flavors" className="label-link">
+              <div 
+                className="product-label flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold uppercase transition-all hover:opacity-90"
+                style={{ backgroundColor: "#e7bc70", color: "#392000" }}
+              >
+                <Image 
+                  src="https://monin.us/cdn/shop/files/new-icon.svg?v=1726166840&width=10" 
+                  alt="" 
+                  width={10} 
+                  height={11} 
+                  loading="lazy"
+                  className="w-[10px] h-[11px]"
+                />
+                NEW
               </div>
+            </Link>
+            
+            <Link href="https://monin.us/collections/flavor-of-the-year" className="label-link">
+              <div 
+                className="product-label px-4 py-2 rounded-full text-sm font-bold uppercase transition-all hover:opacity-90"
+                style={{ backgroundColor: "#392000", color: "#ffffff" }}
+              >
+                FOTY
+              </div>
+            </Link>
           </div>
           
+          <h2 className="h2 product-display__title text-4xl lg:text-5xl font-bold text-[#392000] mb-4 font-kanit">
+            Yuzu Pineapple Syrup
+          </h2>
+          
+          <p className="product-display__price text-2xl font-semibold text-[#392000] mb-6 font-poppins">
+            $13.50 USD
+          </p>
+          
+          <p className="product-display__description text-lg text-[#5D4037] leading-relaxed mb-8 font-kanit max-w-lg">
+            Say "yes" to our 2025 Flavor of the Year—Yuzu! This vibrant blend of yuzu and pineapple delivers a bold burst of flavor, perfect for crafting refreshing tropical cocktails, mocktails, iced teas, refreshers, and more.
+          </p>
+          
+          <Link 
+            href="/products/yuzu-pineapple-syrup" 
+            className="product-display__cta button-pill inline-block bg-[#392000] text-white font-bold text-lg uppercase px-8 py-4 rounded-full hover:bg-[#2E1A17] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#392000]"
+          >
+            Discover
+          </Link>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
