@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star, ShoppingCart } from 'lucide-react';
 
 type Product = {
   id: number;
@@ -20,110 +20,100 @@ type Product = {
   href: string;
 };
 
-const products: Product[] = [
+const products = [
   {
     id: 1,
-    name: 'Xarope de Baunilha',
-    image: 'https://monin.us/cdn/shop/files/750mL-Vanilla.png?v=1724939521&width=533',
-    alt: 'Xarope de Baunilha',
-    price: 'A partir de R$ 47,90',
-    rating: 5,
-    reviewCount: 333,
-    badges: [
-      { label: 'CLEAN', icon: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/clean-icon-2.svg?' },
-      { label: 'POPULAR', icon: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/popular-icon-4.svg?' }
-    ],
-    href: '/products/vanilla-syrup',
+    name: 'Xarope de Baunilha 750mL',
+    price: 'R$ 45,90',
+    originalPrice: 'R$ 52,90',
+    image: 'https://monin.us/cdn/shop/files/vanilla-syrup-750ml.webp?v=1725575697&width=300',
+    rating: 4.8,
+    reviews: 156,
+    badge: 'MAIS VENDIDO',
+    badgeColor: 'bg-monin-brown-dark'
   },
   {
     id: 2,
     name: 'Bomba para Frasco de Vidro 750mL',
-    image: 'https://monin.us/cdn/shop/files/750_ml_glass_bottle_pumps_1.jpg?v=1712093035&width=533',
-    alt: 'Bomba para Frasco de Vidro 750mL',
-    price: 'R$ 15,60',
-    rating: 5,
-    reviewCount: 298,
-    badges: [],
-    href: '/products/monin-750ml-pump',
+    price: 'R$ 28,90',
+    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/a03201d5-2727-41ab-9ec0-b82cea30b5d3/generated_images/professional-product-photography-of-glas-b1d165b8-20250829192114.jpg',
+    rating: 4.9,
+    reviews: 89,
+    badge: 'ACESSÓRIO',
+    badgeColor: 'bg-emerald-600'
   },
   {
     id: 3,
-    name: 'Xarope de Lavanda',
-    image: 'https://monin.us/cdn/shop/files/750mL-Lavender.png?v=1724876415&width=533',
-    alt: 'Xarope de Lavanda',
-    price: 'A partir de R$ 47,90',
-    rating: 5,
-    reviewCount: 346,
-    badges: [
-      { label: 'CLEAN', icon: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/clean-icon-2.svg?' },
-      { label: 'POPULAR', icon: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/popular-icon-4.svg?' }
-    ],
-    href: '/products/lavender-syrup',
+    name: 'Xarope de Caramelo 750mL',
+    price: 'R$ 45,90',
+    image: 'https://monin.us/cdn/shop/files/caramel-syrup-750ml.webp?v=1725575682&width=300',
+    rating: 4.7,
+    reviews: 203,
+    badge: 'CLÁSSICO',
+    badgeColor: 'bg-amber-600'
   },
   {
     id: 4,
-    name: 'Xarope de Caramelo',
-    image: 'https://monin.us/cdn/shop/files/750mL-Caramel.png?v=1724869846&width=533',
-    alt: 'Frasco de 750 mililitros de xarope de caramelo Monin',
-    price: 'A partir de R$ 47,90',
-    rating: 5,
-    reviewCount: 246,
-    badges: [
-      { label: 'CLEAN', icon: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/clean-icon-2.svg?' },
-      { label: 'POPULAR', icon: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/popular-icon-4.svg?' }
-    ],
-    href: '/products/caramel-syrup',
+    name: 'Kit Café Barista Premium',
+    price: 'R$ 189,90',
+    originalPrice: 'R$ 229,90',
+    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/a03201d5-2727-41ab-9ec0-b82cea30b5d3/generated_images/professional-product-photography-of-prem-3952f41d-20250829192134.jpg',
+    rating: 4.9,
+    reviews: 67,
+    badge: 'KIT ESPECIAL',
+    badgeColor: 'bg-purple-600'
   },
   {
     id: 5,
-    name: 'Molho de Chocolate Branco',
-    image: 'https://monin.us/cdn/shop/files/64_12-oz-white-chocolate-sauce-group-rev-5_16-new-pump.png?v=1712093032&width=533',
-    alt: 'Uma garrafa de Molho de Chocolate Branco Monin com dispensador bomba, ao lado de uma garrafa menor de Molho de Chocolate Branco Monin sem bomba.',
-    price: 'A partir de R$ 54,10',
-    rating: 5,
-    reviewCount: 229,
-    badges: [
-      { label: 'POPULAR', icon: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/popular-icon-4.svg?' }
-    ],
-    href: '/products/white-chocolate-sauce',
+    name: 'Xarope de Morango 750mL',
+    price: 'R$ 45,90',
+    image: 'https://monin.us/cdn/shop/files/strawberry-syrup-750ml.webp?v=1725575696&width=300',
+    rating: 4.6,
+    reviews: 142,
+    badge: 'FRUTADO',
+    badgeColor: 'bg-rose-600'
   },
   {
     id: 6,
-    name: 'Molho de Chocolate Amargo',
-    image: 'https://monin.us/cdn/shop/files/64_12-oz-chocolate-sauce-group-rev-5_16-new-pump_-_copy.png?v=1752765928&width=533',
-    alt: 'Uma garrafa de Molho de Chocolate Amargo Monin com dispensador bomba, ao lado de uma garrafa menor de Molho de Chocolate Amargo Monin sem bomba.',
-    price: 'A partir de R$ 47,90',
-    rating: 5,
-    reviewCount: 216,
-    badges: [
-      { label: 'POPULAR', icon: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/popular-icon-4.svg?' }
-    ],
-    href: '/products/dark-chocolate-sauce-1',
+    name: 'Concentrado de Café Gelado 1L',
+    price: 'R$ 67,90',
+    image: 'https://monin.us/cdn/shop/files/1l_iced_coffee_concentrate.webp?v=1725575852&width=300',
+    rating: 4.8,
+    reviews: 98,
+    badge: 'PROFISSIONAL',
+    badgeColor: 'bg-slate-700'
   },
   {
     id: 7,
-    name: 'Bomba para Frasco Plástico 1L',
-    image: 'https://monin.us/cdn/shop/files/1l_plastic_bottle_pumps_1.jpg?v=1712093074&width=533',
-    alt: 'Bomba para Frasco Plástico 1L',
-    price: 'R$ 15,60',
-    rating: 5,
-    reviewCount: 268,
-    badges: [],
-    href: '/products/monin-pump-for-1l-plastic-bottle',
+    name: 'Xarope de Chocolate 750mL',
+    price: 'R$ 45,90',
+    image: 'https://monin.us/cdn/shop/files/dark-chocolate-syrup-750ml.webp?v=1725575684&width=300',
+    rating: 4.9,
+    reviews: 178,
+    badge: 'FAVORITO',
+    badgeColor: 'bg-yellow-600'
   },
   {
     id: 8,
-    name: 'Molho de Caramelo',
-    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/images/64_12-oz-caramel-sauce-group-rev-5_16-new-pump-22.webp?',
-    alt: 'Uma garrafa de Molho de Caramelo Monin com dispensador bomba, ao lado de uma garrafa menor de Molho de Caramelo Monin sem bomba.',
-    price: 'A partir de R$ 52,00',
-    rating: 5,
-    reviewCount: 211,
-    badges: [
-        { label: 'POPULAR', icon: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a03201d5-2727-41ab-9ec0-b82cea30b5d3-monin-us/assets/svgs/popular-icon-4.svg?' }
-    ],
-    href: '/products/caramel-sauce',
+    name: 'Molho de Caramelo Premium 375mL',
+    price: 'R$ 38,90',
+    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/a03201d5-2727-41ab-9ec0-b82cea30b5d3/generated_images/professional-product-photography-of-gour-a3911071-20250829192123.jpg',
+    rating: 4.7,
+    reviews: 134,
+    badge: 'GOURMET',
+    badgeColor: 'bg-orange-600'
   },
+  {
+    id: 9,
+    name: 'Coleção Sabores Tropicais',
+    price: 'R$ 129,90',
+    originalPrice: 'R$ 159,90',
+    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/a03201d5-2727-41ab-9ec0-b82cea30b5d3/generated_images/professional-product-photography-of-prem-f40243c5-20250829192143.jpg',
+    rating: 4.8,
+    reviews: 76,
+    badge: 'COLEÇÃO',
+    badgeColor: 'bg-teal-600'
+  }
 ];
 
 const StarRating = ({ rating, reviewCount }: { rating: number; reviewCount: number }) => (
@@ -181,65 +171,138 @@ const ProductCard = ({ product }: { product: Product }) => (
 
 export default function TopPicks() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsVisible = 4;
-  const totalPositions = products.length - itemsVisible + 1;
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % Math.ceil(products.length / 4));
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(totalPositions - 1, prev + 1));
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + Math.ceil(products.length / 4)) % Math.ceil(products.length / 4));
   };
+
+  const itemsPerSlide = 4;
+  const startIndex = currentIndex * itemsPerSlide;
+  const visibleProducts = products.slice(startIndex, startIndex + itemsPerSlide);
 
   return (
-    <section className="bg-background py-20 sm:py-28">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-4xl md:text-5xl font-bold font-kanit text-monin-brown-dark text-center mb-16">
-          Principais Escolhas para Você
-        </h2>
-        <div className="relative">
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-in-out -mx-3"
-              style={{ transform: `translateX(-${currentIndex * (100 / itemsVisible)}%)` }}
-            >
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
+    <section className="bg-gradient-to-b from-monin-gray-light to-white py-20 lg:py-28">
+      <div className="container">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold font-kanit text-monin-brown-dark mb-6 tracking-tight">
+            Principais Escolhas para Você
+          </h2>
+          <p className="text-lg text-gray-600 font-poppins max-w-2xl mx-auto leading-relaxed">
+            Nossos produtos mais amados pelos clientes, selecionados especialmente para elevar suas criações
+          </p>
         </div>
 
-        <div className="flex items-center justify-center gap-6 mt-12">
+        <div className="relative">
+          {/* Navigation Buttons */}
           <button
-            onClick={handlePrev}
-            disabled={currentIndex === 0}
-            aria-label="Slide anterior"
-            className="w-14 h-14 flex items-center justify-center rounded-full bg-monin-tan-beige/50 text-monin-brown-dark disabled:opacity-50 disabled:cursor-not-allowed hover:bg-monin-tan-beige transition-all duration-200 hover:scale-105"
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:bg-monin-brown-dark hover:text-white group"
+            aria-label="Produtos anteriores"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           
-          <div className="font-poppins text-sm text-monin-brown-medium">
-            <span className="font-bold">{currentIndex + 1}</span>
-            <span className="mx-2">de</span>
-            <span>{totalPositions}</span>
-          </div>
-
           <button
-            onClick={handleNext}
-            disabled={currentIndex === totalPositions - 1}
-            aria-label="Próximo slide"
-            className="w-14 h-14 flex items-center justify-center rounded-full bg-monin-tan-beige/50 text-monin-brown-dark disabled:opacity-50 disabled:cursor-not-allowed hover:bg-monin-tan-beige transition-all duration-200 hover:scale-105"
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:bg-monin-brown-dark hover:text-white group"
+            aria-label="Próximos produtos"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
+
+          {/* Products Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-8">
+            {visibleProducts.map((product) => (
+              <div key={product.id} className="group">
+                <div className="bg-white rounded-2xl shadow-md border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden">
+                  {/* Product Badge */}
+                  <div className="relative">
+                    <div className={`absolute top-3 left-3 z-10 ${product.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg`}>
+                      {product.badge}
+                    </div>
+                    
+                    {/* Product Image */}
+                    <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 p-6 flex items-center justify-center">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        width={300}
+                        height={300}
+                        className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="p-6">
+                    {/* Rating */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex text-yellow-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'fill-current' : 'text-gray-300'}`} />
+                        ))}
+                      </div>
+                      <span className="text-sm text-gray-600 font-medium">
+                        {product.rating} ({product.reviews})
+                      </span>
+                    </div>
+
+                    {/* Product Name */}
+                    <h3 className="font-kanit text-lg font-semibold text-monin-brown-dark mb-3 group-hover:text-[#7B2D5F] transition-colors duration-200 leading-tight">
+                      {product.name}
+                    </h3>
+
+                    {/* Price */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-2xl font-bold text-monin-brown-dark font-kanit">
+                        {product.price}
+                      </span>
+                      {product.originalPrice && (
+                        <span className="text-sm text-gray-500 line-through font-poppins">
+                          {product.originalPrice}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Add to Cart Button */}
+                    <button className="w-full bg-monin-brown-dark text-white rounded-xl py-3 px-4 font-poppins-medium text-sm uppercase tracking-wide transition-all duration-300 hover:bg-[#7B2D5F] hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2 group/btn">
+                      <ShoppingCart className="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110" />
+                      Adicionar ao Carrinho
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-8 gap-2">
+            {Array.from({ length: Math.ceil(products.length / 4) }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-monin-brown-dark scale-125' 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Ir para página ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="text-center mt-12">
-          <Link href="/collections/principais-escolhas" className="inline-block bg-monin-brown-dark text-white font-poppins-medium text-sm tracking-wider uppercase py-4 px-12 rounded-full hover:bg-[#7B2D5F] hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-            Ver Tudo
+        {/* View All Button */}
+        <div className="text-center mt-16">
+          <Link
+            href="/collections"
+            className="inline-block bg-monin-brown-dark text-white rounded-full py-4 px-12 uppercase font-poppins-medium text-sm tracking-widest transition-all duration-300 ease-in-out hover:scale-105 hover:bg-[#7B2D5F] hover:shadow-lg"
+          >
+            Ver Todos os Produtos
           </Link>
         </div>
       </div>
